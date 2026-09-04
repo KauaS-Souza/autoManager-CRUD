@@ -6,6 +6,8 @@ import com.example.automanagercrud.entities.Cliente;
 import com.example.automanagercrud.repositories.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ClienteService {
 
@@ -51,6 +53,18 @@ public class ClienteService {
 
         return "Alterações feita com sucesso!";
 
+    }
+
+    public String deletarCliente(long id){
+
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+
+        if (cliente.isEmpty()){
+            return "Cliente não registrado";
+        } else {
+            clienteRepository.deleteById(id);
+            return "Cliente apagado com sucesso";
+        }
     }
 
 }
